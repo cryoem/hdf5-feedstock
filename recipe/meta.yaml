@@ -62,7 +62,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}  # [not win]
     - cmake >=3.2.2              # [win]
     - libtool                    # [not win]
     - make                       # [not win]
@@ -88,7 +87,6 @@ outputs:
       build:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('fortran') }}  # [not win]
         - cmake >=3.2.2  # [win]
         - libtool  # [not win]
         - make                       # [not win]
@@ -104,27 +102,22 @@ outputs:
       requires:
         - {{ compiler('c') }}
         - {{ compiler('cxx') }}
-        - {{ compiler('fortran') }}  # [not win]
         - pkg-config  # [not win]
       files:
         - h5_cmprss.c
         - h5tutr_cmprss.cpp
-        - h5_cmprss.f90
-        - compound_fortran2003.f90
       commands:
         # Verify UNIX CLI tools.
         {% if mpi == 'nompi' %}
         {% set h5_compilers = [
             "h5c++",
             "h5cc",
-            "h5fc",
         ] %}
         {% else %}
         # no p on parallel h5c++!
         {% set h5_compilers = [
             "h5c++",
             "h5pcc",
-            "h5pfc",
         ] %}
         {% endif %}
         {% set hdf5_unix_cmds = h5_compilers + [

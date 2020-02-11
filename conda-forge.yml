@@ -1,11 +1,22 @@
 appveyor:
   secure: {BINSTAR_TOKEN: hhS98dVbKVMiq1d7IEUyMCfA9Be1YSA2+BfDYf+1wwLYdOoWLWVaehGr6/mjqeAv}
-compiler_stack: comp7
-max_py_ver: '37'
-max_r_ver: '35'
-provider: {linux_aarch64: default, linux_ppc64le: default, win: azure}
 travis:
   secure: {BINSTAR_TOKEN: f2MZSAFEOhupW7DlxyFqfdtKRt94q7toFxHVIMRYPBjbXqN5LLZJELVNHaTorm9hyVMVOUueJaDAzXjVmTtBQF3v4qiyThMZN/Nb9OxvkgtcWRAwfgLmfsGZMM7jt7C7xGuDjL4QMeSMrpUIbJI9WcCavib4b0/HN3Wf6a6YNc2cLUG0bYAi4W9HUixbB70zj4sBtNdVVa7asmEXdYeRnfVQua3Y2s2+H166eW+O6Cl6gfQsgIkeQHqYRZpLirxj+EP48YJDzTZcI17roygCYNXU3dQBoE1FcAz39QMozzkTzZ0OSyD7+3AmzfkrjeHRG1nxJ3j7HQFwYrwicfj5/pznxWGpG6TNly33Tgu0CNTcKCrzXzN/nUFbPeahID+gKzwTkFDvv3vmelFTlOtp+OA1y7EloMTV++fIYObOmD8rBk/qOBqOcDuj9hsrjt46FHkJekSB4TPvsqwgkSl8cPgHwsHUsTE6EXJZ+IM72aM5npDdoU+lj7jECrO2mEwDsiZptqmSqho1U5dQLUxN2xKPd3X0NYFVazUl+YSwaXh/bPWOmsfamDbvrEh3Z2Tb+QGCGvXWuVMyXJd7/clU92eKOYEKB32WKUGeYOSVo0762ItzILC5QgN9iL42wPEJpS2Nat6OcbE8/GiMvQKklZ7nxCXMzxs07YTFuziDf0Y=}
 idle_timeout_minutes: 60
+
+channels:
+  sources: [cryoem, defaults, conda-forge]
+  targets:
+    - [cryoem, main]
+
+github:
+  user_or_org: cryoem
+  repo_name: hdf5-feedstock
+
+provider:
+  linux: circle
+  osx: travis
+  win: appveyor
+
 azure:
-  timeout_minutes: 600  # 10 hours for azure due to emulated aarch64 build
+  build_id: blank

@@ -34,6 +34,6 @@ set -e
 
 make_build_number ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
-conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --clobber-file ./.ci_support/clobber_${CONFIG}.yaml
+conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --clobber-file ./.ci_support/clobber_${CONFIG}.yaml --no-test
 
 upload_package ./ ./recipe ./.ci_support/${CONFIG}.yaml

@@ -40,7 +40,7 @@ fi
             --enable-using-memchecker \
             --enable-clear-file-buffers \
             --with-ssl \
-            --enable-static=yes \
+            --enable-static=no \
 
 # allow oversubscribing with openmpi in make check
 export OMPI_MCA_rmaps_base_oversubscribe=yes

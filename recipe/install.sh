@@ -14,12 +14,3 @@ if [[ ("$target_platform" != "linux-ppc64le") && ("$target_platform" != "linux-a
 fi
 
 rm -rf ${PREFIX}/share/hdf5_examples
-
-# remove the static libraries
-rm -f ${PREFIX}/lib/libhdf5_hl_fortran.a
-rm -f ${PREFIX}/lib/libhdf5_hl_cpp.a
-rm -f ${PREFIX}/lib/libhdf5hl_fortran.a
-rm -f ${PREFIX}/lib/libhdf5_hl.a
-rm -f ${PREFIX}/lib/libhdf5_fortran.a
-rm -f ${PREFIX}/lib/libhdf5_cpp.a
-rm -f ${PREFIX}/lib/libhdf5.a

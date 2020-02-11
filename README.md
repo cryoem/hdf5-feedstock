@@ -71,45 +71,24 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_fortran_compiler_version4mpimpich</td>
+              <td>osx_mpimpich</td>
               <td>
                 <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version4mpimpich" alt="variant">
+                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_mpimpich" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_fortran_compiler_version4mpinompi</td>
+              <td>osx_mpinompi</td>
               <td>
                 <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version4mpinompi" alt="variant">
+                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_mpinompi" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_fortran_compiler_version4mpiopenmpi</td>
+              <td>osx_mpiopenmpi</td>
               <td>
                 <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version4mpiopenmpi" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_fortran_compiler_version7mpimpich</td>
-              <td>
-                <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version7mpimpich" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_fortran_compiler_version7mpinompi</td>
-              <td>
-                <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version7mpinompi" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_fortran_compiler_version7mpiopenmpi</td>
-              <td>
-                <a href="https://dev.azure.com/cryoem/feedstock-builds/_build/latest?definitionId=blank&branchName=master">
-                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_fortran_compiler_version7mpiopenmpi" alt="variant">
+                  <img src="https://dev.azure.com/cryoem/feedstock-builds/_apis/build/status/hdf5-feedstock?branchName=master&jobName=osx&configuration=osx_mpiopenmpi" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -139,7 +118,6 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-hdf5-green.svg)](https://anaconda.org/cryoem/hdf5) | [![Conda Downloads](https://img.shields.io/conda/dn/cryoem/hdf5.svg)](https://anaconda.org/cryoem/hdf5) | [![Conda Version](https://img.shields.io/conda/vn/cryoem/hdf5.svg)](https://anaconda.org/cryoem/hdf5) | [![Conda Platforms](https://img.shields.io/conda/pn/cryoem/hdf5.svg)](https://anaconda.org/cryoem/hdf5) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-hdf5--static-green.svg)](https://anaconda.org/cryoem/hdf5-static) | [![Conda Downloads](https://img.shields.io/conda/dn/cryoem/hdf5-static.svg)](https://anaconda.org/cryoem/hdf5-static) | [![Conda Version](https://img.shields.io/conda/vn/cryoem/hdf5-static.svg)](https://anaconda.org/cryoem/hdf5-static) | [![Conda Platforms](https://img.shields.io/conda/pn/cryoem/hdf5-static.svg)](https://anaconda.org/cryoem/hdf5-static) |
 
 Installing hdf5_split
 =====================
@@ -150,10 +128,10 @@ Installing `hdf5_split` from the `cryoem` channel can be achieved by adding `cry
 conda config --add channels cryoem
 ```
 
-Once the `cryoem` channel has been enabled, `hdf5, hdf5-static` can be installed with:
+Once the `cryoem` channel has been enabled, `hdf5` can be installed with:
 
 ```
-conda install hdf5 hdf5-static
+conda install hdf5
 ```
 
 It is possible to list all of the versions of `hdf5` available on your platform with:

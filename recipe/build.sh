@@ -25,6 +25,7 @@ fi
             --build="${BUILD}" \
             --enable-linux-lfs \
             --with-zlib="${PREFIX}" \
+            --with-szlib="${PREFIX}" \
             --with-pthread=yes  \
             --enable-cxx \
             --with-default-plugindir="${PREFIX}/lib/hdf5/plugin" \

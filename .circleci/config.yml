@@ -5,49 +5,11 @@
 version: 2
 
 jobs:
-  build_linux_mpimpich:
+  build_linux_:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_mpimpich"
-        DOCKER_IMAGE: "condaforge/linux-anvil-comp7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: |
-            export CI=circle
-            ./.scripts/run_docker_build.sh
-          no_output_timeout: 60m
-  build_linux_mpinompi:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_mpinompi"
-        DOCKER_IMAGE: "condaforge/linux-anvil-comp7"
-    steps:
-      - checkout
-      - run:
-          name: Fast finish outdated PRs and merge PRs
-          command: |
-            ./.circleci/fast_finish_ci_pr_build.sh
-            ./.circleci/checkout_merge_commit.sh
-      - run:
-          # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
-          command: |
-            export CI=circle
-            ./.scripts/run_docker_build.sh
-          no_output_timeout: 60m
-  build_linux_mpiopenmpi:
-    working_directory: ~/test
-    machine: true
-    environment:
-      - CONFIG: "linux_mpiopenmpi"
+      - CONFIG: "linux_"
         DOCKER_IMAGE: "condaforge/linux-anvil-comp7"
     steps:
       - checkout
@@ -67,6 +29,4 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_linux_mpimpich
-      - build_linux_mpinompi
-      - build_linux_mpiopenmpi
+      - build_linux_

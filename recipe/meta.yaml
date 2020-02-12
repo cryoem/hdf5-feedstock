@@ -32,7 +32,7 @@
 {% endif %}
 
 package:
-  name: hdf5_split
+  name: hdf5
   version: {{ version }}
 
 source:
@@ -74,33 +74,6 @@ requirements:
     - {{ mpi }}  # [mpi != 'nompi']
     - zlib
     - libaec     # [unix]
-
-outputs:
-  - name: hdf5
-    build:
-      skip: True  # [win and vc<14]
-      run_exports:
-        - {{ pin_subpackage('hdf5', max_pin='x.x.x') }} {{ build_pin }}
-      string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
-
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - cmake >=3.2.2  # [win]
-        - libtool  # [not win]
-        - make                       # [not win]
-        - ninja  # [win]
-      host:
-        - {{ mpi }}  # [mpi != 'nompi']
-        - zlib
-        - libaec     # [unix]
-      run:
-        - {{ mpi }}  # [mpi != 'nompi']
-        - zlib
-        - libaec     # [unix]
 
     test:
       requires:

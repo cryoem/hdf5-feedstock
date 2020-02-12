@@ -96,9 +96,11 @@ outputs:
       host:
         - {{ mpi }}  # [mpi != 'nompi']
         - zlib
+        - libaec     # [unix]
       run:
         - {{ mpi }}  # [mpi != 'nompi']
         - zlib
+        - libaec     # [unix]
 
     test:
       requires:

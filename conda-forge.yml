@@ -5,7 +5,7 @@ travis:
 idle_timeout_minutes: 60
 
 channels:
-  sources: [cryoem, defaults, conda-forge]
+  sources: [conda-forge, defaults]
   targets:
     - [cryoem, main]
 

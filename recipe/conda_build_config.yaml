@@ -6,6 +6,6 @@ pin_run_as_build:
   openmpi: x.x
 
 channel_sources:
-  - cryoem, defaults,conda-forge
+  - conda-forge, defaults
 channel_targets:
   - cryoem main

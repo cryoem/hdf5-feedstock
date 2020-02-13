@@ -1,11 +1,22 @@
 appveyor:
-  secure: {BINSTAR_TOKEN: tumuXLL8PU75WMnRDemRy02ruEq2RpNxeK3dz0MjFssnosPm2v4EFjfNB4PTotA1}
-compiler_stack: comp7
-max_py_ver: '37'
-max_r_ver: '35'
-provider: {linux_aarch64: default, linux_ppc64le: default, win: azure}
+  secure: {BINSTAR_TOKEN: hhS98dVbKVMiq1d7IEUyMCfA9Be1YSA2+BfDYf+1wwLYdOoWLWVaehGr6/mjqeAv}
 travis:
-  secure: {BINSTAR_TOKEN: WKYNVfz4qQHP2WBDJIh3pnQOPhdnNpGdNsvWXu0SMIW34+GW1chLE8qqxy3zTjW4MZZEXIUlUb5IJQomgt7xUVN4XIcBRKmK0CE1I3McEVbUe1Uwzd0LvsxhzvYLGTOmm8G7RQei7GEYAsqDCKeV9DS4Kzft1rdX0w5tIPm6IPdcCP/znCHH9UnRUnmtVoC/0QVfQfSR80f3S0hXbdjhSzyaWTqH8kvgrIqWmPh9/uXXkwqqn8OicBlHwGvXqefMjco+x8H3SVRimElccez1E8fudFs/YipHDZqvPUQiAi9UN8c98wKnOlMVkrVmuVQ7+YTZSn5tzMBpIkh/ct40uZW//1n4XKCYbdolVss+Vj1Mw/ckObHv696O3zm3rxN3N5HUo9mTRaCFF10n294IqO/C7T3sqMaWyBBg7Ix2Vfa7dYKeMNE8KDrB2IWF/aYG5ZaSpWclzKqiiLTI8Dm4VrS1UTkjEKJEu8e/0JRIJcFs8XaWl/SvGT6Z7+Vuw+CNXBo/1ic6ghOl/INRYb5F9KB0UtafrIc+ZKUmpdp7DrYuip6nPGlYFXyHtRXbK+RBMsGJFZCncGeVEc/N+/0OUk0FMfS9xW9HMMQvkGHrptr0IwpUY8KM1JM64aQTvpgHAznsf83HOqaJzDhxHSWRIrGIV/hFTSMSyqGtQuNsfS8=}
+  secure: {BINSTAR_TOKEN: f2MZSAFEOhupW7DlxyFqfdtKRt94q7toFxHVIMRYPBjbXqN5LLZJELVNHaTorm9hyVMVOUueJaDAzXjVmTtBQF3v4qiyThMZN/Nb9OxvkgtcWRAwfgLmfsGZMM7jt7C7xGuDjL4QMeSMrpUIbJI9WcCavib4b0/HN3Wf6a6YNc2cLUG0bYAi4W9HUixbB70zj4sBtNdVVa7asmEXdYeRnfVQua3Y2s2+H166eW+O6Cl6gfQsgIkeQHqYRZpLirxj+EP48YJDzTZcI17roygCYNXU3dQBoE1FcAz39QMozzkTzZ0OSyD7+3AmzfkrjeHRG1nxJ3j7HQFwYrwicfj5/pznxWGpG6TNly33Tgu0CNTcKCrzXzN/nUFbPeahID+gKzwTkFDvv3vmelFTlOtp+OA1y7EloMTV++fIYObOmD8rBk/qOBqOcDuj9hsrjt46FHkJekSB4TPvsqwgkSl8cPgHwsHUsTE6EXJZ+IM72aM5npDdoU+lj7jECrO2mEwDsiZptqmSqho1U5dQLUxN2xKPd3X0NYFVazUl+YSwaXh/bPWOmsfamDbvrEh3Z2Tb+QGCGvXWuVMyXJd7/clU92eKOYEKB32WKUGeYOSVo0762ItzILC5QgN9iL42wPEJpS2Nat6OcbE8/GiMvQKklZ7nxCXMzxs07YTFuziDf0Y=}
 idle_timeout_minutes: 60
+
+channels:
+  sources: [conda-forge, defaults]
+  targets:
+    - [cryoem, main]
+
+github:
+  user_or_org: cryoem
+  repo_name: hdf5-feedstock
+
+provider:
+  linux: circle
+  osx: travis
+  win: appveyor
+
 azure:
-  timeout_minutes: 600  # 10 hours for azure due to emulated aarch64 build
+  build_id: blank

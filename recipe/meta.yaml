@@ -1,6 +1,6 @@
 {% set version = "1.10.6" %}
 {% set maj_min_ver = ".".join(version.split(".")[:2]) %}
-{% set build = 0 %}
+{% set build = 4 %}
 
 # recipe-lint fails if mpi is undefined
 {% set mpi = mpi or 'nompi' %}
@@ -32,7 +32,7 @@
 {% endif %}
 
 package:
-  name: hdf5_split
+  name: hdf5
   version: {{ version }}
 
 source:
@@ -62,7 +62,6 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}  # [not win]
     - cmake >=3.2.2              # [win]
     - libtool                    # [not win]
     - make                       # [not win]
@@ -70,121 +69,74 @@ requirements:
   host:
     - {{ mpi }}  # [mpi != 'nompi']
     - zlib
+    - libaec     # [unix]
   run:
     - {{ mpi }}  # [mpi != 'nompi']
     - zlib
+    - libaec     # [unix]
 
-outputs:
-  - name: hdf5
-    build:
-      skip: True  # [win and vc<14]
-      run_exports:
-        - {{ pin_subpackage('hdf5', max_pin='x.x.x') }} {{ build_pin }}
-      string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"
-    script: install.sh  # [not win]
-    script: install.bat  # [win]
-
-    requirements:
-      build:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - {{ compiler('fortran') }}  # [not win]
-        - cmake >=3.2.2  # [win]
-        - libtool  # [not win]
-        - make                       # [not win]
-        - ninja  # [win]
-      host:
-        - {{ mpi }}  # [mpi != 'nompi']
-        - zlib
-      run:
-        - {{ mpi }}  # [mpi != 'nompi']
-        - zlib
-
-    test:
-      requires:
-        - {{ compiler('c') }}
-        - {{ compiler('cxx') }}
-        - {{ compiler('fortran') }}  # [not win]
-        - pkg-config  # [not win]
-      files:
-        - h5_cmprss.c
-        - h5tutr_cmprss.cpp
-        - h5_cmprss.f90
-        - compound_fortran2003.f90
-      commands:
-        # Verify UNIX CLI tools.
-        {% if mpi == 'nompi' %}
-        {% set h5_compilers = [
-            "h5c++",
-            "h5cc",
-            "h5fc",
-        ] %}
-        {% else %}
-        # no p on parallel h5c++!
-        {% set h5_compilers = [
-            "h5c++",
-            "h5pcc",
-            "h5pfc",
-        ] %}
-        {% endif %}
-        {% set hdf5_unix_cmds = h5_compilers + [
-            "h5perf_serial",
-            "h5redeploy",
-        ] %}
-        {% for each_hdf5_unix_cmd in hdf5_unix_cmds %}
-        - command -v {{ each_hdf5_unix_cmd }}   # [not win]
-        {% endfor %}
-        # Verify CLI tools.
-        {% set hdf5_cmds = [
-            "gif2h5",
-            "h52gif",
-            "h5copy",
-            "h5debug",
-            "h5diff",
-            "h5dump",
-            "h5import",
-            "h5jam",
-            "h5ls",
-            "h5mkgrp",
-            "h5repack",
-            "h5repart",
-            "h5stat",
-            "h5unjam"
-        ] %}
-        {% for each_hdf5_cmd in hdf5_cmds %}
-        - command -v {{ each_hdf5_cmd }}  # [not win]
-        - where {{ each_hdf5_cmd }}  # [win]
-        {% endfor %}
-        # Verify libraries.
-        {% set hdf5_libs = [
-            "hdf5",
-            "hdf5_cpp",
-            "hdf5_hl",
-            "hdf5_hl_cpp"
-        ] %}
-        {% for each_hdf5_lib in hdf5_libs %}
-        - test -f $PREFIX/lib/lib{{ each_hdf5_lib }}${SHLIB_EXT}  # [not win]
-        - if not exist %PREFIX%\\Library\\lib\\{{ each_hdf5_lib }}.lib exit 1  # [win]
-        - if not exist %PREFIX%\\Library\\bin\\{{ each_hdf5_lib }}.dll exit 1  # [win]
-        {% endfor %}
-
-  - name: hdf5-static                                   # [not win]
-    build:                                              # [not win]
-      string: "{{ mpi_prefix }}_h{{ PKG_HASH }}_{{ build }}"  # [not win]
-    requirements:                                       # [not win]
-      build:                                            # [not win]
-        - {{ compiler('c') }}                           # [not win]
-        - {{ compiler('cxx') }}                         # [not win]
-        - {{ compiler('fortran') }}                     # [not win]
-      run:                                              # [not win]
-        - {{ pin_subpackage('hdf5', exact=True) }}      # [not win]
-    script: install-static.sh                           # [not win]
-    test:                                               # [not win]
-      commands:                                         # [not win]
-        {% set hdf5_libs = ["hdf5", "hdf5_cpp", "hdf5_hl", "hdf5_hl_cpp"] %}  # [not win]
-        {% for each_hdf5_lib in hdf5_libs %}            # [not win]
-        - test -f $PREFIX/lib/lib{{ each_hdf5_lib }}.a  # [not win]
-        {% endfor %}                                    # [not win]
+  test:
+    requires:
+      - {{ compiler('c') }}
+      - {{ compiler('cxx') }}
+      - pkg-config  # [not win]
+    files:
+      - h5_cmprss.c
+      - h5tutr_cmprss.cpp
+    commands:
+      # Verify UNIX CLI tools.
+      {% if mpi == 'nompi' %}
+      {% set h5_compilers = [
+          "h5c++",
+          "h5cc",
+      ] %}
+      {% else %}
+      # no p on parallel h5c++!
+      {% set h5_compilers = [
+          "h5c++",
+          "h5pcc",
+      ] %}
+      {% endif %}
+      {% set hdf5_unix_cmds = h5_compilers + [
+          "h5perf_serial",
+          "h5redeploy",
+      ] %}
+      {% for each_hdf5_unix_cmd in hdf5_unix_cmds %}
+      - command -v {{ each_hdf5_unix_cmd }}   # [not win]
+      {% endfor %}
+      # Verify CLI tools.
+      {% set hdf5_cmds = [
+          "gif2h5",
+          "h52gif",
+          "h5copy",
+          "h5debug",
+          "h5diff",
+          "h5dump",
+          "h5import",
+          "h5jam",
+          "h5ls",
+          "h5mkgrp",
+          "h5repack",
+          "h5repart",
+          "h5stat",
+          "h5unjam"
+      ] %}
+      {% for each_hdf5_cmd in hdf5_cmds %}
+      - command -v {{ each_hdf5_cmd }}  # [not win]
+      - where {{ each_hdf5_cmd }}  # [win]
+      {% endfor %}
+      # Verify libraries.
+      {% set hdf5_libs = [
+          "hdf5",
+          "hdf5_cpp",
+          "hdf5_hl",
+          "hdf5_hl_cpp"
+      ] %}
+      {% for each_hdf5_lib in hdf5_libs %}
+      - test -f $PREFIX/lib/lib{{ each_hdf5_lib }}${SHLIB_EXT}  # [not win]
+      - if not exist %PREFIX%\\Library\\lib\\{{ each_hdf5_lib }}.lib exit 1  # [win]
+      - if not exist %PREFIX%\\Library\\bin\\{{ each_hdf5_lib }}.dll exit 1  # [win]
+      {% endfor %}
 
 about:
   home: http://www.hdfgroup.org/HDF5/
